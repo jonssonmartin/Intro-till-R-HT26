@@ -507,6 +507,7 @@ Väljer 3e raden och 2e kolumnen
 Exempel:
 
 ```{r}
+#| classes: shrink-code
 datafil
 # Exempel
 datafil[3,2] # <1>
@@ -533,6 +534,7 @@ Specificerar man bara en av dem så väljs alla rader/columner
 Exempel:
 
 ```{r}
+#| classes: shrink-code
 datafil
 # Exempel
 datafil[3,] # <1>
