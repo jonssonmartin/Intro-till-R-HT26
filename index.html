@@ -777,9 +777,17 @@ SÖS  DS  KS
 </div><div class="column" style="width:30%;">
 <p>Exempel:</p>
 <div class="cell shrink-code">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-114"><pre class="sourceCode r code-annotation-code code-with-copy"><code class="sourceCode r"><span id="annotated-cell-114-1"><a href="#annotated-cell-114-1" aria-hidden="true" tabindex="-1"></a>datafil</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-114"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-114-1"><a href="#annotated-cell-114-1" aria-hidden="true" tabindex="-1"></a>datafil</span>
 <span id="annotated-cell-114-2"><a href="#annotated-cell-114-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Exempel</span></span>
-<span id="annotated-cell-114-3"><a href="#annotated-cell-114-3" aria-hidden="true" tabindex="-1"></a>datafil[<span class="dv">3</span>,<span class="dv">2</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-114" data-target-annotation="1">1</button><span id="annotated-cell-114-3" class="code-annotation-target"><a href="#annotated-cell-114-3" aria-hidden="true" tabindex="-1"></a>datafil[<span class="dv">3</span>,<span class="dv">2</span>]</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-114" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-114" data-code-lines="3" data-code-annotation="1">Väljer 3e raden och andra kolumnen</span>
+</dd>
+</dl>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   age sex hospital
 1   28   F      SÖS
@@ -797,9 +805,6 @@ Levels: F M</code></pre>
 </div>
 </div>
 </div></div>
-<ol type="1">
-<li>Väljer 3e raden och andra kolumnen</li>
-</ol>
 </section>
 <section id="datatruktur-i-r" class="slide level2">
 <h2>Datatruktur i R</h2>
@@ -810,11 +815,23 @@ Levels: F M</code></pre>
 <p><code>datafil[ , colnummer ]</code></p>
 </div><div class="column" style="width:50%;">
 <p>Exempel:</p>
-<div class="cell shrink-code">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-116"><pre class="sourceCode r code-annotation-code code-with-copy"><code class="sourceCode r"><span id="annotated-cell-116-1"><a href="#annotated-cell-116-1" aria-hidden="true" tabindex="-1"></a>datafil</span>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-116"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-116-1"><a href="#annotated-cell-116-1" aria-hidden="true" tabindex="-1"></a>datafil</span>
 <span id="annotated-cell-116-2"><a href="#annotated-cell-116-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Exempel</span></span>
-<span id="annotated-cell-116-3"><a href="#annotated-cell-116-3" aria-hidden="true" tabindex="-1"></a>datafil[<span class="dv">3</span>,]</span>
-<span id="annotated-cell-116-4"><a href="#annotated-cell-116-4" aria-hidden="true" tabindex="-1"></a>datafil[,<span class="dv">3</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-116" data-target-annotation="1">1</button><span id="annotated-cell-116-3" class="code-annotation-target"><a href="#annotated-cell-116-3" aria-hidden="true" tabindex="-1"></a>datafil[<span class="dv">3</span>,]</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-116" data-target-annotation="2">2</button><span id="annotated-cell-116-4" class="code-annotation-target"><a href="#annotated-cell-116-4" aria-hidden="true" tabindex="-1"></a>datafil[,<span class="dv">3</span>]</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-116" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-116" data-code-lines="3" data-code-annotation="1">Väljer 3e raden i datafilen samt alla kolumner</span>
+</dd>
+<dt data-target-cell="annotated-cell-116" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-116" data-code-lines="4" data-code-annotation="2">Väljer 3e kolumnen och alla rader</span>
+</dd>
+</dl>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   age sex hospital
 1   28   F      SÖS
@@ -834,10 +851,6 @@ Levels: SÖS DS KS</code></pre>
 </div>
 </div>
 </div></div>
-<ol type="1">
-<li>Väljer 3e raden i datafilen samt alla kolumner</li>
-<li>Väljer 3e kolumnen och alla rader</li>
-</ol>
 </section>
 <section id="välja-en-variabel" class="slide level2">
 <h2>Välja en variabel</h2>

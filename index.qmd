@@ -514,10 +514,11 @@ datafil[3,2] # <1>
 
 
 ```
+1.  Väljer 3e raden och andra kolumnen
 :::
 :::::
 
-1.  Väljer 3e raden och andra kolumnen
+
 
 ## Datatruktur i R
 
@@ -534,19 +535,18 @@ Specificerar man bara en av dem så väljs alla rader/columner
 Exempel:
 
 ```{r}
-#| classes: shrink-code
 datafil
 # Exempel
 datafil[3,] # <1>
 datafil[,3] # <2>
 
-
 ```
+1.  Väljer 3e raden i datafilen samt alla kolumner
+2.  Väljer 3e kolumnen och alla rader
 :::
 :::::
 
-1.  Väljer 3e raden i datafilen samt alla kolumner
-2.  Väljer 3e kolumnen och alla rader
+
 
 ## Välja en variabel
 
