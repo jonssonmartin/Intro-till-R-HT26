@@ -233,6 +233,23 @@ Förutom att hantera och analysera data så är R väldigt bra för visualiserin
 
 ![](images/clipboard-2279219876.png)
 
+## Följ med i presentationen
+
+Du kan kopiera koden i presentationen genom och klicka i högra hörnet kodblocket
+
+Hjälptext finns ibland tillagt
+
+```{r, eval=FALSE}
+
+datafil |> 
+  select(sex, age) |> # <1> 
+  arrange(age) # <2>
+  
+```
+
+1.  Detta är en hjälptext
+2.  Det här är också en hjälptext
+
 ## Skriva kod i R
 
 Det finns olika sätt att skriva kod i R. En vanlig uppdelning är mellan;
