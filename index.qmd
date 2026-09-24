@@ -225,7 +225,13 @@ I ett IDE så kan du se olika delar separat
 
 Förutom att hantera och analysera data så är R väldigt bra för visualisering
 
-![](images/clipboard-501980136.gif)
+![](images/clipboard-2226049323.gif)
+
+## Vad kan man göra i R?
+
+Förutom att hantera och analysera data så är R väldigt bra för visualisering
+
+![](images/clipboard-2279219876.png)
 
 ## Skriva kod i R
 
@@ -514,11 +520,10 @@ datafil[3,2] # <1>
 
 
 ```
+
 1.  Väljer 3e raden och andra kolumnen
 :::
 :::::
-
-
 
 ## Datatruktur i R
 
@@ -541,12 +546,11 @@ datafil[3,] # <1>
 datafil[,3] # <2>
 
 ```
+
 1.  Väljer 3e raden i datafilen samt alla kolumner
 2.  Väljer 3e kolumnen och alla rader
 :::
 :::::
-
-
 
 ## Välja en variabel
 
@@ -676,13 +680,13 @@ mean(datafil$age[datafil$sex=="F"])
 
 ![](images/ggplot_hive.jpg){width="593"}
 
-## Pipes (`%>%`)
+## Pipes (`|>`)
 
-En stor skillnad mellan base R och tidyverse är användandet av `%>%` ("pipes")
+En stor skillnad mellan base R och tidyverse är användandet av `|>` ("pipes")
 
-Har varit så populärt så att det numera finns i base R men skrivs då `|>`
+Tidigare fanns inte `|>` i base R. då krävdes paketet magrittr och såg ut såhär `%>%`
 
-Man kan utläsa `%>%` som "and then"
+Man kan utläsa `|>` som "and then"
 
 ## dplyr
 
@@ -714,9 +718,9 @@ en datafil utifrån en eller flera variabler
 ::: {.column width="50%"}
 ```{r}
 library(dplyr)
-datafil %>% filter(sex=="F")
-datafil %>% filter(hospital=="SÖS")
-datafil %>% filter(sex=="F" & hospital=="SÖS")
+datafil |> filter(sex=="F")
+datafil |> filter(hospital=="SÖS")
+datafil |> filter(sex=="F" & hospital=="SÖS")
 ```
 :::
 :::::
@@ -731,9 +735,9 @@ datafil %>% filter(sex=="F" & hospital=="SÖS")
 ::: {.column width="50%"}
 ```{r}
 
-datafil %>% select(sex)
-datafil %>% select(hospital)
-datafil %>% select(sex, hospital)
+datafil |> select(sex)
+datafil |> select(hospital)
+datafil |> select(sex, hospital)
 ```
 :::
 :::::
@@ -748,9 +752,9 @@ datafil %>% select(sex, hospital)
 ::: {.column width="50%"}
 ```{r}
 
-datafil %>% arrange(age)
+datafil |> arrange(age)
 
-datafil %>% arrange(sex, age)
+datafil |> arrange(sex, age)
 
 ```
 :::
@@ -766,7 +770,7 @@ datafil %>% arrange(sex, age)
 ::: {.column width="60%"}
 ```{r}
 
-datafil %>% 
+datafil |> 
   mutate(under40 = ifelse(age<40, "under 40", "över 40"))
 
 ```
@@ -782,8 +786,8 @@ group_by är egentligen inget verb, men väldigt användbart i kombination med a
 
 ::: {.column width="50%"}
 ```{r}
-datafil %>% 
-  group_by(hospital) %>% 
+datafil |> 
+  group_by(hospital) |> 
   summarise(mean_age = mean(age))
 ```
 :::
@@ -794,9 +798,9 @@ datafil %>%
 ::::: columns
 ::: {.column width="40%"}
 ```{r}
-datafil %>% 
-  filter(sex=="F") %>% 
-  select(age) %>% 
+datafil |> 
+  filter(sex=="F") |> 
+  select(age) |> 
   summarise(mean_age = mean(age))
 ```
 :::
@@ -845,7 +849,7 @@ dplyr
 
 ```{r}
 
-datafil %>% arrange(sex, age)
+datafil |> arrange(sex, age)
 
 
 ```
@@ -874,7 +878,7 @@ dplyr
 
 ```{r}
 
-datafil %>% filter(sex=="F")
+datafil |> filter(sex=="F")
 
 
 ```
@@ -903,7 +907,7 @@ dplyr
 
 ```{r}
 
-datafil %>% 
+datafil |> 
   mutate(age_cat = case_when(between(age, 0,40) ~ "0-40",
                              between(age,41,60) ~ "41-60",
                              between(age, 61,120) ~ "61-120"))
@@ -931,7 +935,7 @@ dplyr
 
 ```{r}
 
-datafil %>% select(sex, age)
+datafil |> select(sex, age)
 
 
 ```
@@ -964,9 +968,9 @@ dplyr
 
 ```{r}
 
-datafil %>% 
-  filter(sex=="F") %>% 
-  group_by(hospital) %>% 
+datafil |> 
+  filter(sex=="F") |> 
+  group_by(hospital) |> 
   summarise(age.median = median(age),
             age.mean = mean(age),
             age.sd = sd(age))  
@@ -999,9 +1003,9 @@ dplyr
 
 ```{r}
 
-datafil %>% 
-  filter(sex=="F") %>% 
-  group_by(hospital) %>% 
+datafil |> 
+  filter(sex=="F") |> 
+  group_by(hospital) |> 
   summarise(age.median = median(age),
             age.mean = mean(age),
             age.sd = sd(age))
@@ -1105,8 +1109,108 @@ Paketet skimr kan vara väldigt användbart
 ```{r}
 
 library(skimr)
-skimr::skim(datafil)
+skimr::skim(datafil) #<1>
 
+```
+
+1.  "skimr::" betyder att man väljer funktionen skim() från paketet skimr. Är användbart då flera paket kan använda samma namn \## Ta ut en tabell
+
+Finns användbara paket för att ta ut tabeller
+
+```{r}
+
+#install.packages(gt) # <1>
+#install.packages(gtsummary) # <1>
+
+library(gt)
+library(gtsummary)
+
+datafil |> tbl_summary() # <2>
+
+```
+
+1.  Om inte tidigare installerat. Ta bort \# för att installerat paketen
+2.  Om ingenting specificeras så väljs alla variabler i tabellen
+
+## Ta ut en tabell
+
+Man kan specificera variabler genom `include=c()`
+
+```{r}
+datafil |> tbl_summary(by=sex, include=c(age, hospital)) 
+```
+
+## Snygga till tabellen
+
+Man kan ändra olika specifikationer
+
+```{r}
+datafil |> 
+  tbl_summary(by=sex, include=c(age, hospital),
+              statistic = list( #<1>
+                all_continuous() ~ "{median} ({p25}, {p75}), (n={N_nonmiss})",
+                all_categorical() ~ "{n}/{N} ({p}%)"),
+              digits = c(all_categorical() ~ c(0, 0, 1), #<2>
+                         all_continuous() ~ c(1, 0, 0)))  
+```
+
+1.  Här specificeras vad som syns i rutorna. "{n}/{N} ({p}%)" blir 3/6 (50.0%) i tabellen
+2.  Här specificeras antal decimaler. Om specifikationen hade varit "all_categorical() \~ c(1, 1, 2)" hade tabellen visat 3.0/6.0 (50.00%)
+
+## Snygga till tabellen
+
+Även storlek och dylikt kan specificeras
+
+```{r}
+datafil |> 
+  tbl_summary(by = sex, include = c(age, hospital),
+              statistic = list(
+              all_continuous() ~ "{median} ({p25}, {p75}), (n={N_nonmiss})",
+                all_categorical() ~ "{n}/{N} ({p}%)"),
+              digits = c(all_categorical() ~ c(0, 0, 1),
+                         all_continuous() ~ c(1, 0, 0))) |>
+  modify_header(
+    label = "*Variabel*",
+    stat_1 = "**Kvinnor**  \nN = {n}",
+    stat_2 = "**Män**  \nN = {n}"
+  ) |>
+  modify_spanning_header(c(stat_1, stat_2) ~ "Tabell uppdelat på kön")|>
+  as_gt() |>
+  tab_options(table.font.size = 11)
+```
+
+## Spara tabell
+
+```{r}
+library(gtsummary)
+datafil |> 
+  tbl_summary(by = sex, include = c(age, hospital),
+              statistic = list(
+              all_continuous() ~ "{median} ({p25}, {p75}), (n={N_nonmiss})",
+                all_categorical() ~ "{n}/{N} ({p}%)"),
+              digits = c(all_categorical() ~ c(0, 0, 1),
+                         all_continuous() ~ c(1, 0, 0))) |>
+  modify_header(
+    label = "*Variabel*",
+    stat_1 = "**Kvinnor**  \nN = {n}",
+    stat_2 = "**Män**  \nN = {n}"
+  ) |>
+  modify_spanning_header(c(stat_1, stat_2) ~ "Tabell uppdelat på kön")|>
+  as_gt() |>
+  gt::tab_options(table.font.size = 11) |> 
+  gt::gtsave("~/Downloads/tabell_forskarskolan.docx") # <1> 
+```
+
+1.  funktionen gtsave från pakete gt sparar ner tabellen som word dokument
+
+## Spara tabell
+
+Man kan också spara en enkel tabell och sedan manuellt i word
+
+```{r}
+datafil |> tbl_summary(by=sex, include=c(age, hospital)) |> 
+  as_gt() |> 
+  gt::gtsave("~/Downloads/enkel_tabell_forskarskolan.docx") 
 ```
 
 # Andra datatyper
@@ -1323,8 +1427,8 @@ PAR_SV <- read.csv(paste0(git_url, "PAR_SV_project.csv"))
 
 #Slå ihop filerna
 par <- bind_rows(PAR_SV, PAR_OV)
-par <- par %>% 
-  group_by(LopNr) %>%  # grupperar på löpnummer
+par <- par |> 
+  group_by(LopNr) |>  # grupperar på löpnummer
   arrange(LopNr, INDATUM) # soreterar på datum
 
 head(par, n=10)
@@ -1344,9 +1448,9 @@ För syftet nu så kan vi slå ihop alla diagnosvariabler till en variabel som v
 
 ```{r}
 ## Kodar om alla tomma variabler till NA
-par <- par %>% mutate(across(matches("DIA"), ~ na_if(trimws(.), "")))
+par <- par |> mutate(across(matches("DIA"), ~ na_if(trimws(.), "")))
 ## Skapar en ny variabel med diagnoser
-par <- par %>% 
+par <- par |> 
   unite(DIAGNOSER, matches("DIA"), sep = " ", na.rm = T, remove = TRUE)
 
 head(par)
@@ -1358,7 +1462,7 @@ Följande script kollar ifall en viss diagnoskod förekommer
 
 ```{r}
 
-par <- par %>%group_by(LopNr) %>% 
+par <- par |>group_by(LopNr) |> 
   mutate(I21 = str_detect(DIAGNOSER, "I21"),
          I25 = str_detect(DIAGNOSER, "I25"),
          I10 = str_detect(DIAGNOSER, "I10"),
@@ -1370,20 +1474,20 @@ par <- par %>%group_by(LopNr) %>%
 
 ```{r}
 
-par %>% ungroup() %>% 
-  filter(I21==T) %>% 
-  select(DIAGNOSER, I21) %>% 
-  head() %>% 
+par |> ungroup() |> 
+  filter(I21==T) |> 
+  select(DIAGNOSER, I21) |> 
+  head() |> 
   knitr::kable() # används endast för bätter output i presentationen
 ```
 
 ## Vi kan göra samma sak med diabetes
 
 ```{r}
-par %>% ungroup() %>% 
-  filter(diabetes==T) %>% 
-  select(DIAGNOSER, diabetes) %>% 
-  head() %>% 
+par |> ungroup() |> 
+  filter(diabetes==T) |> 
+  select(DIAGNOSER, diabetes) |> 
+  head() |> 
   knitr::kable() # används endast för bätter output i presentationen
 ```
 
@@ -1394,11 +1498,11 @@ Akut hjärtinfarkt
 ```{r}
 
 
-I21_first <- par %>% 
-  filter(I21==T) %>% 
-  group_by(LopNr) %>% 
-  arrange(LopNr, INDATUM)%>% 
-  transmute(I21 = as.numeric(I21) ,I21_date = INDATUM) %>% 
+I21_first <- par |> 
+  filter(I21==T) |> 
+  group_by(LopNr) |> 
+  arrange(LopNr, INDATUM)|> 
+  transmute(I21 = as.numeric(I21) ,I21_date = INDATUM) |> 
   slice_head(n=1)
 
 
@@ -1409,11 +1513,11 @@ I21_first <- par %>%
 Ischemisk hjärtsjukdom
 
 ```{r}
-I25_first <- par %>% 
-  filter(I25==T) %>% 
-  group_by(LopNr) %>% 
-  arrange(LopNr, INDATUM)%>% 
-  transmute(I25 = as.numeric(I25) ,I25_date = INDATUM) %>% 
+I25_first <- par |> 
+  filter(I25==T) |> 
+  group_by(LopNr) |> 
+  arrange(LopNr, INDATUM)|> 
+  transmute(I25 = as.numeric(I25) ,I25_date = INDATUM) |> 
   slice_head(n=1)
 
 ```
@@ -1422,33 +1526,33 @@ I25_first <- par %>%
 
 ```{r}
 
-I10_first <- par %>% 
-  filter(I10==T) %>% 
-  group_by(LopNr) %>% 
-  arrange(LopNr, INDATUM)%>% 
-  transmute(I10 = as.numeric(I10) ,I10_date = INDATUM) %>% 
+I10_first <- par |> 
+  filter(I10==T) |> 
+  group_by(LopNr) |> 
+  arrange(LopNr, INDATUM)|> 
+  transmute(I10 = as.numeric(I10) ,I10_date = INDATUM) |> 
   slice_head(n=1)
 ```
 
 ## Diabetes
 
 ```{r}
-diabetes_first <- par %>% 
-  filter(diabetes==T) %>% 
-  group_by(LopNr) %>% 
-  arrange(LopNr, INDATUM)%>% 
-  transmute(diabetes = as.numeric(diabetes) ,diabetes_date = INDATUM) %>% 
+diabetes_first <- par |> 
+  filter(diabetes==T) |> 
+  group_by(LopNr) |> 
+  arrange(LopNr, INDATUM)|> 
+  transmute(diabetes = as.numeric(diabetes) ,diabetes_date = INDATUM) |> 
   slice_head(n=1)
 ```
 
 ## Förmaksflimmer/fladder
 
 ```{r}
-I48_first <- par %>% 
-  filter(I48==T) %>% 
-  group_by(LopNr) %>% 
-  arrange(LopNr, INDATUM)%>% 
-  transmute(I48 = as.numeric(I48) ,I48_date = INDATUM) %>% 
+I48_first <- par |> 
+  filter(I48==T) |> 
+  group_by(LopNr) |> 
+  arrange(LopNr, INDATUM)|> 
+  transmute(I48 = as.numeric(I48) ,I48_date = INDATUM) |> 
   slice_head(n=1)
 ```
 
@@ -1459,7 +1563,7 @@ comorb_tidy <- list(I48_first,
                     diabetes_first, 
                     I10_first, 
                     I25_first, 
-                    I21_first) %>% 
+                    I21_first) |> 
   purrr::reduce(full_join, by="LopNr")
 ```
 
@@ -1468,9 +1572,9 @@ comorb_tidy <- list(I48_first,
 Som ni ser så är det 1 unikt LopNr per rad
 
 ```{r}
-comorb_tidy %>% 
-  arrange(LopNr) %>% 
-  head(n=20) %>% 
+comorb_tidy |> 
+  arrange(LopNr) |> 
+  head(n=20) |> 
   knitr::kable()
 ```
 
@@ -1480,7 +1584,7 @@ För att göra det så kan i stort sett samma kod återanvändas
 
 ```{r}
 
-final_df <- list(trialdata, lisa_tidy, comorb_tidy)%>% 
+final_df <- list(trialdata, lisa_tidy, comorb_tidy)|> 
   purrr::reduce(left_join, by="LopNr")
 ```
 
