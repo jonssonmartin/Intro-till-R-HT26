@@ -1132,13 +1132,20 @@ Paketet skimr kan vara väldigt användbart
 ```{r}
 
 library(skimr)
-skimr::skim(datafil) #<1>
+library(gt) # används endest för tydligar output i presentationen
+
+skimr::skim(datafil) |> # <1>
+  select(skim_variable, n_missing, complete_rate, # <2>
+         numeric.mean, numeric.sd, 	numeric.hist) |> 
+  gt() |> 
+  tab_options(table.font.size = px(16)) 
 
 ```
 
 1.  "skimr::" betyder att man väljer funktionen skim() från paketet skimr. Är användbart då flera paket kan använda samma namn \## Ta ut en tabell
+2.  Här väljer jag ut variabler från skimr som jag är intresserad av
 
-Finns användbara paket för att ta ut tabeller
+## Finns användbara paket för att ta ut tabeller
 
 ```{r}
 
@@ -1360,7 +1367,12 @@ lisa2025 <- read.csv(paste0(git_url, "Project_LISA_2025.csv"))
 lisa_df <- dplyr::bind_rows(lisa2015, lisa2016, lisa2017, lisa2018, lisa2019,
                             lisa2020, lisa2021, lisa2022, lisa2023, lisa2024, lisa2025)
 
-skimr::skim(lisa_df)
+
+skimr::skim(lisa_df) |> # <1>
+  select(skim_variable, n_missing, complete_rate, # <2>
+         numeric.mean, numeric.sd, 	numeric.hist) |> 
+  gt() |> 
+  tab_options(table.font.size = px(16)) 
 ```
 
 ## Datafilen `lisa_df` kan analyseras
@@ -1618,7 +1630,12 @@ Hitills så har vi inte tagit hand om de patienter som inte fått någon diagnos
 Detta innebär att I48, I10 etc endast har 1 eller missing
 
 ```{r}
-skimr::skim(final_df |> select(Age, Sex, I10, I21, I25, I48, diabetes))
+skimr::skim(final_df |> 
+              select(Age, Sex, I10, I21, I25, I48, diabetes))|> 
+  select(skim_variable, n_missing, complete_rate, 
+         numeric.mean, numeric.sd, 	numeric.hist) |> 
+  gt() |>
+  tab_options(table.font.size = px(16))
 ```
 
 ## Ersätt NA med 0
@@ -1633,5 +1650,9 @@ final_df <- final_df %>%
 ## Inspektera igen
 
 ```{r}
-skimr::skim(final_df |> select(Age, Sex, I10, I21, I25, I48, diabetes))
+skimr::skim(final_df |> select(Age, Sex, I10, I21, I25, I48, diabetes))|> 
+  select(skim_variable, n_missing, complete_rate, 
+         numeric.mean, numeric.sd, 	numeric.hist) |> 
+  gt() |>
+  tab_options(table.font.size = px(16))
 ```
