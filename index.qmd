@@ -233,6 +233,14 @@ Förutom att hantera och analysera data så är R väldigt bra för visualiserin
 
 ![](images/clipboard-2279219876.png)
 
+## Simuleringar
+
+Simuleringar kan vara mer eller mindre avancerade. Men mycket svårt om man inte använder sig av programering
+
+Exempel power analys:
+
+![](images/clipboard-743628781.png){width="688"}
+
 ## Följ med i presentationen
 
 Du kan kopiera koden i presentationen genom och klicka i högra hörnet kodblocket
