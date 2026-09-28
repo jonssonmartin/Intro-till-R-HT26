@@ -977,6 +977,12 @@ by(datafil[datafil$sex=="F",],
                 age.sd = sd(x$age))
    })
 
+aggregate(age ~ hospital, 
+          data = datafil[datafil$sex == "F", ],
+          FUN = function(x) c(median = median(x), 
+                              mean = mean(x), 
+                              sd = sd(x)))
+
 ```
 :::
 
