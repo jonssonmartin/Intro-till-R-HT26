@@ -1618,7 +1618,7 @@ Hitills så har vi inte tagit hand om de patienter som inte fått någon diagnos
 Detta innebär att I48, I10 etc endast har 1 eller missing
 
 ```{r}
-skimr::skim(final_df)
+skimr::skim(final_df |> select(Age, Sex, I10, I21, I25, I48, diabetes))
 ```
 
 ## Ersätt NA med 0
@@ -1633,5 +1633,5 @@ final_df <- final_df %>%
 ## Inspektera igen
 
 ```{r}
-skimr::skim(final_df)
+skimr::skim(final_df |> select(Age, Sex, I10, I21, I25, I48, diabetes))
 ```
