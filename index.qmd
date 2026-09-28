@@ -1613,6 +1613,25 @@ final_df <- list(trialdata, lisa_tidy, comorb_tidy)|>
 
 ## Inspektera datafil
 
+Hitills så har vi inte tagit hand om de patienter som inte fått någon diagnos
+
+Detta innebär att I48, I10 etc endast har 1 eller missing
+
+```{r}
+skimr::skim(final_df)
+```
+
+## Ersätt NA med 0
+
+Vi kan ersätta dessa med 0 (dvs vi antar att om man inte fått en diagnos så har man inte diagnosen)
+
+```{r}
+final_df <- final_df %>%
+  mutate(across(c(I48, I10, diabetes, I25, I21), ~replace_na(.x, 0)))
+```
+
+## Inspektera igen
+
 ```{r}
 skimr::skim(final_df)
 ```
