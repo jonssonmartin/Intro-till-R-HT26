@@ -910,6 +910,35 @@ datafil |> filter(sex=="F")
 :::
 :::::
 
+## Välja en eller flera observationer
+
+::::: columns
+::: {.column width="50%"}
+Base R
+
+```{r}
+
+datafil[3, ] # samma som tidigare slide
+
+datafil[c(3,5,7), ]
+
+```
+:::
+
+::: {.column width="50%"}
+dplyr
+
+```{r}
+
+datafil |> slice(3)
+
+datafil |> slice(3, 5, 7)
+
+
+```
+:::
+:::::
+
 ## Skapa ny variabel
 
 Base R
