@@ -233,6 +233,10 @@ Förutom att hantera och analysera data så är R väldigt bra för visualiserin
 
 ![](images/clipboard-2279219876.png)
 
+## Vad kan man göra i R
+
+![](images/clipboard-924976495.png)
+
 ## Simuleringar
 
 Simuleringar kan vara mer eller mindre avancerade. Men mycket svårt om man inte använder sig av programering
